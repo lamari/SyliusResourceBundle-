@@ -66,9 +66,10 @@
                     <div class="span6">
                         <h3>Request</h3>
                         <form id="demo">
+                            <input id="baseurl" type="hidden" value="{{ path("homepage") }}">
                             <div class="form-group">
                                 <label for="id">Method</label>
-                                <select name="_method" id="method">
+                                <select name="_method" id="_method">
                                     <option value="GET" data-json="">GET</option>
                                     <option value="POST" data-json='{"title":"title","author":"author","description":"description"}'>POST</option>
                                     <option value="PATCH" data-json='{"id":1,"title": "title"}'>PUT</option>
@@ -93,7 +94,7 @@
                     <div class="span6 hide block-response">
                         <div>
                             <h3>Response</h3>
-                            <span id="response"></span>
+                            <h5>URL: <span id="response"></span></h5>
                         </div>
                         <div>
                             <h5>Status: <span id="status"></span></h5>
