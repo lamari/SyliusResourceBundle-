@@ -1,0 +1,25 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+{% from 'AppBundle:Macros:misc.html.twig' import pagination %}
+{% from 'AppBundle:Macros:misc.html.twig' import list %}
+
+
+{% block content %}
+
+    <div class="page-header">
+        <div class="actions-menu row-fluid ">
+            <div class="span9">
+                <h1><i class="glyphicon glyphicon-th-list"></i> Books list in format HTML</h1>
+            </div>
+            <div class="span3 pull-right pagination-right">
+            {{ buttons.create(path('html_book_create'), 'New record') }}
+            </div>
+        </div>
+    </div>
+
+    {{ pagination(books) }}
+    {{ list(books) }}
+    {{ pagination(books) }}
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% macro list(books) %}
+
+    {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
+
+    {% if books|length > 0 %}
+        <table class="sylius-books-table table table-bordered">
+            <thead>
+            <tr>
+                <th class="id">{{ sylius_resource_sort('id', '#id') }}</th>
+                <th class="title">{{ sylius_resource_sort('name', 'title'|trans) }}</th>
+                <th class="author">{{ 'author'|trans }}</th>
+                <th class="description">{{ 'description'|trans }}</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for book in books %}
+                <tr id="{{ book.id }}">
+                    <td class="id">
+                        {{ book.id }}
+                    </td>
+                    <td class="info">
+                        <div class="media">
+                            <div class="media-body">
+                                <h5 class="media-heading">
+                                    <a class="title" href="{{ path('html_book_show', {'id': book.id}) }}">
+                                        {{ book.title }}
+                                    </a>
+                                </h5>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.description }}</td>
+                    <td class="center-text">
+                        {{ buttons.edit(path('html_book_update', {'id': book.id})) }}
+                        {{ buttons.delete(path('html_book_delete', {'id': book.id})) }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-info">
+            <h4 class="alert-heading">{{ 'sylius.ui.information'|trans }}</h4>
+            {{ 'sylius.book.no_results'|trans }}
+        </div>
+    {% endif %}
+
+{% endmacro %}
+
+
+{% macro pagination(paginator, options) %}
+    {% if paginator.haveToPaginate()|default(false) %}
+        <div class="row">
+            <div class="col-xs-9">
+                {{ pagerfanta(paginator, 'twitter_bootstrap3_translated', options|default({})) }}
+            </div>
+
+            <div class="col-xs-3">
+                <div class="pull-right">
+                    <div class="btn-group paginator">
+                        {{ sylius_resource_paginate(paginator, [10,20,30]) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endmacro %}
