@@ -14,4 +14,3 @@ app_book_html:
        alias: html.book
    type: sylius.resource
    prefix: /html
-

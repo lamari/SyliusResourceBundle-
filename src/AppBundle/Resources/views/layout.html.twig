@@ -13,11 +13,7 @@
     {% block sylius_stylesheets %}
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap.no-icons.min.css" />
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css" />
-        <style type="text/css">
-            body {
-                padding-top: 60px;
-            }
-        </style>
+        <link rel="stylesheet" href="{{ asset("bundles/app/css/style.css") }}" />
     {% endblock %}
 </head>
 <body>
@@ -26,15 +22,17 @@
         <div class="container-fluid">
             <a class="brand" href="{{ path('homepage') }}">Sylius</a>
             <ul class="nav">
-                <li><a href="#" data-toggle="modal" data-target="#myModal">Open API </a></li>
+                <li><a href="#" data-toggle="modal" data-target="#myModal">Open API Console</a></li>
             </ul>
         </div>
     </div>
 </div>
 <div class="container">
-    <ol class="breadcrumb">
-        <li><a href="{{ path('html_book_index') }}">Back to Collection</a></li>
-    </ol>
+    {% block breadcrumb %}
+        <ol class="breadcrumb">
+            <li><a href="{{ path('html_book_index') }}">Back to Collection</a></li>
+        </ol>
+    {% endblock %}
 
     {% for type in ['success', 'error'] %}
         {% for message in app.session.flashbag.get(type) %}
@@ -53,65 +51,7 @@
     </footer>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">API Demo</h4>
-            </div>
-            <div class="modal-body">
-                <div class="row-fluid">
-                    <div class="span6">
-                        <h3>Request</h3>
-                        <form id="demo">
-                            <input id="baseurl" type="hidden" value="{{ path("homepage") }}">
-                            <div class="form-group">
-                                <label for="id">Method</label>
-                                <select name="_method" id="_method">
-                                    <option value="GET" data-json="">GET</option>
-                                    <option value="POST" data-json='{"title":"title","author":"author","description":"description"}'>POST</option>
-                                    <option value="PATCH" data-json='{"id":1,"title": "title"}'>PUT</option>
-                                    <option value="PUT" data-json='{"id":1,"title": "title","author":"author","description":"description"}'>PATCH</option>
-                                    <option value="DELETE" data-json='{"id":1,"title": "title","author":"author","description":"description"}'>DELETE</option>
-                                </select>
-
-                            </div>
-                            <div class="form-group">
-                                <label for="content">Content</label>
-                                <textarea id="content" name="content"></textarea>
-                            </div>
-                            <div class="block-id hide form-group">
-                                <label for="id">ID</label>
-                                <input id="id" name="id" class="form-text " />
-                            </div>
-                            <div class="form-group">
-                                <button type="submit">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="span6 hide block-response">
-                        <div>
-                            <h3>Response</h3>
-                            <h5>URL: <span id="response"></span></h5>
-                        </div>
-                        <div>
-                            <h5>Status: <span id="status"></span></h5>
-                        </div>
-                        <div>
-                            <h5>Preview</h5>
-                            <textarea id="preview"></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+{% include "AppBundle::modal.html.twig" %}
 
 
 {% block sylius_javascripts %}

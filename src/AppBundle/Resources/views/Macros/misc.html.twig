@@ -6,11 +6,11 @@
         <table class="sylius-books-table table table-bordered">
             <thead>
             <tr>
-                <th class="id">{{ sylius_resource_sort('id', '#id') }}</th>
-                <th class="title">{{ sylius_resource_sort('name', 'title'|trans) }}</th>
-                <th class="author">{{ 'author'|trans }}</th>
-                <th class="description">{{ 'description'|trans }}</th>
-                <th>Actions</th>
+                <th class="id">#id</th>
+                <th class="title">{{ 'Title'|trans }}</th>
+                <th class="author">{{ 'Author'|trans }}</th>
+                <th class="description">{{ 'Description'|trans }}</th>
+                <th class="actions">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -33,8 +33,12 @@
                     <td>{{ book.author }}</td>
                     <td>{{ book.description }}</td>
                     <td class="center-text">
-                        {{ buttons.edit(path('html_book_update', {'id': book.id})) }}
+                        <div class="pull-left">
+                            {{ buttons.edit(path('html_book_update', {'id': book.id})) }}
+                        </div>
+                        <div class="pull-right">
                         {{ buttons.delete(path('html_book_delete', {'id': book.id})) }}
+                        </div>
                     </td>
                 </tr>
             {% endfor %}

@@ -7,38 +7,29 @@ use Doctrine\ORM\Mapping as ORM;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * Book
- *
- * @ORM\Table(name="book")
- * @ORM\Entity
+ * Book class
  */
 class Book implements ResourceInterface
 {
     /**
      * @var string
-     *
      */
     private $title;
 
     /**
      * @var string
-     *
      */
     private $author;
 
     /**
      * @var string
-     *
      */
     private $description;
 
     /**
      * @var integer
-     *
      */
     private $id;
-
-
 
     /**
      * Set title
